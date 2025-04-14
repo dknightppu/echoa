@@ -1,5 +1,4 @@
 const pool = require('../../db');
-const { createClassics } = require('./controller');
 
 const getClassics = async (filter) => {
     let query;
