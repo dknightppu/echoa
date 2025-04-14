@@ -4,8 +4,9 @@ const controller = require('./controller');
 const router = Router();
 
 router.get('/', controller.getClassics);
-router.get('/', controller.createClassics);
-router.get('/:id', controller.updateClassics);
+router.post('/', controller.createClassics);
+router.get('/:id', controller.getClassicsById);
+router.put('/', controller.updateClassics)
 
 module.exports = router;
 

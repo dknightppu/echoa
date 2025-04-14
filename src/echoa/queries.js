@@ -1,4 +1,5 @@
 const pool = require('../../db');
+const { getClassicsById } = require('./controller');
 
 const getClassics = async (filter) => {
     let query;
@@ -32,6 +33,7 @@ const createClassics = (data) => {
 
 module.exports = {
     getClassics,
+    getClassicsById,
     createClassics,
     updateClassics,
 };
