@@ -16,7 +16,7 @@ const getclassics = async (req, res) => {
 const createClassics = async (req, res) => {
     try {
       const data = req.body;
-      const result = await queries.addClassics(data);
+      const result = await queries.createClassics(data);
       res.status(201).json(result.rows[0]);
     } catch (error) {
       res.status(500).json({ error: error.message });
