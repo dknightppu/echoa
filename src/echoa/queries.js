@@ -1,35 +1,7 @@
-const pool = require('../../db');
-const { getClassicsById } = require('./controller');
-
-const getClassics = async (filter) => {
-    let query;
-    let params = [];
-
-    if (filter) {
-        query = "SELECT * FROM classicalbums WHERE column_name = $1";
-        params.push(filter);
-      } else {
-        query = "SELECT * FROM classicalbums";
-      }
-      
-      return pool.query(query, params);
-    };
-
-const createClassics = (data) => {
-    const query = 'INSERT INTO clasicalbums (artist) VALUES ($1::varchar) RETURNING *';
-    return pool.query(query, [data.artist]);
-  };
-
-  const updateClassics = (id, data) => {
-    const query = `
-      UPDATE classicalbums
-      SET artist = $1::varchar,
-          album_title = $2::varchar
-      WHERE id = $3::int
-      RETURNING *;
-    `;
-    return pool.query(query, [data.artist, data.album_title, id]);
-  };
+const getClassics = "select * from classicalbums";
+const getClassicsById = "select * from classicalbums where accountId =$1";
+const createClassics = "insert into classicalbums(artist,album_title,year,genre) VALUES($1,$2,$3,$4)";
+const updateClassics ="update classicalbums set name = $1, album_title = $2, year =$3, genre =$4 where classicsId =$5";
 
 module.exports = {
     getClassics,

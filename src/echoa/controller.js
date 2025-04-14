@@ -26,27 +26,28 @@ const getClassicsById = (req, res) => {
   });
 }
 
-//Add Data
+//Post Add Information
 const createClassics = (req, res) => {
 const {artist,album_title,year,genre} = req.body;
 
 pool.query(queries.createClassics, [artist,album_title,year,genre], (error, results)=> {
   if(error)throw error;
   res.status(200).json(results.rows);
+  res.status(201).json("Successfully added a new classic");
 });
 
 };
 
-// Update Data
-const updateClassics = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const data = req.body;
-      const result = await queries.updateClassics(id, data);
-      res.status(200).json(result.rows[0]);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+//Put Modify Information
+const updateClassicsClassics = (req, res) => {
+  const {artist,album_title,year,genre} = req.body;
+  
+  pool.query(queries.updateClassics, [artist,album_title,year,genre], (error, results)=> {
+    if(error)throw error;
+    res.status(200).json(results.rows);
+    res.status(201).json("Successfully modified a classic");
+  });
+  
   };
 
 module.exports = {
