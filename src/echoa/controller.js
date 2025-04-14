@@ -13,7 +13,7 @@ const getclassics = async (req, res) => {
 };
 
 //Add Data
-const createClassics = async (req, res) => {
+const createclassics = async (req, res) => {
     try {
       const data = req.body;
       const result = await queries.createClassics(data);
@@ -24,7 +24,7 @@ const createClassics = async (req, res) => {
 };
 
 // Update Data
-const updateClassics = async (req, res) => {
+const updateclassics = async (req, res) => {
     try {
       const { id } = req.params;
       const data = req.body;

@@ -1,4 +1,5 @@
 const pool = require('../../db');
+const { createClassics } = require('./controller');
 
 const getClassics = async (filter) => {
     let query;
@@ -14,7 +15,7 @@ const getClassics = async (filter) => {
       return pool.query(query, params);
     };
 
-const addClassicss = (data) => {
+const createClassicss = (data) => {
     const query = 'INSERT INTO clasicalbums (artist) VALUES ($1::varchar) RETURNING *';
     return pool.query(query, [data.artist]);
   };
@@ -32,6 +33,6 @@ const addClassicss = (data) => {
 
 module.exports = {
     getClassics,
-    addClassics,
+    createClassics,
     updateClassics,
 };
