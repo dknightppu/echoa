@@ -10,6 +10,13 @@ const pool = new Pool({
     //database: "classics",
     database: "classics_2ob6",
     port: 5432,
+
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+    
 });
+
 
 module.exports = pool;
