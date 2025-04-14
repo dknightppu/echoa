@@ -15,12 +15,12 @@ const getClassics = async (filter) => {
       return pool.query(query, params);
     };
 
-const createClassicss = (data) => {
+const createClassics = (data) => {
     const query = 'INSERT INTO clasicalbums (artist) VALUES ($1::varchar) RETURNING *';
     return pool.query(query, [data.artist]);
   };
 
-  const updateDirectors = (id, data) => {
+  const updateClassics = (id, data) => {
     const query = `
       UPDATE classicalbums
       SET artist = $1::varchar,
