@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/echoa", echoaRoutes);
 
 //API Route
-app.use("/api/v1/echoa", async (req, res) => {
+app.get("/api/v1/echoa", async (req, res) => {
 try {
     const result = await pool.query('SELECT * FROM classicalbums');
     res.json(result.rows);
