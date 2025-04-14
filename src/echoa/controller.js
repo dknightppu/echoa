@@ -2,7 +2,7 @@ const pool = require('../../db');
 const queries = require("./queries");
 
 //Get All Data
-const getclassics = async (req, res) => {
+const getClassics = async (req, res) => {
     try {
     const { filter } = req.query;  
       const result = await queries.getClassics(filter);
@@ -13,7 +13,7 @@ const getclassics = async (req, res) => {
 };
 
 //Add Data
-const createclassics = async (req, res) => {
+const createClassics = async (req, res) => {
     try {
       const data = req.body;
       const result = await queries.createClassics(data);
@@ -24,7 +24,7 @@ const createclassics = async (req, res) => {
 };
 
 // Update Data
-const updateclassics = async (req, res) => {
+const updateClassics = async (req, res) => {
     try {
       const { id } = req.params;
       const data = req.body;
