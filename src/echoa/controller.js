@@ -3,14 +3,15 @@ const queries = require("./queries");
 
 //Get All Data
 const getClassics = async (req, res) => {
-    try {
-    const { filter } = req.query;  
-      const result = await queries.getClassics(filter);
-      res.status(200).json(result.rows);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+  try {
+    const result = await pool.query(queries.getClassics); // just pass the SQL text
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
 };
+
 const getClassicsById = (req, res) => {
   const classicsid = parseInt(req.params.id);
   if(isNaN(classicsid)) {
