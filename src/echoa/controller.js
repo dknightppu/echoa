@@ -32,23 +32,35 @@ const {artist,album_title,year,genre} = req.body;
 
 pool.query(queries.createClassics, [artist,album_title,year,genre], (error, results)=> {
   if(error)throw error;
-  res.status(200).json(results.rows);
-  res.status(201).json("Successfully added a new classic");
+  res.status(201).json({ message: "Successfully added a new classic" });
 });
 
 };
 
 //Put Modify Information
-const updateClassicsClassics = (req, res) => {
-  const {artist,album_title,year,genre} = req.body;
-  
-  pool.query(queries.updateClassics, [artist,album_title,year,genre], (error, results)=> {
-    if(error)throw error;
-    res.status(200).json(results.rows);
-    res.status(201).json("Successfully modified a classic");
-  });
-  
-  };
+// Inside controller.js
+
+const updateClassics = async (req, res) => {
+  const { id } = req.params;
+  const { artist, album_title, year, genre } = req.body;
+
+  try {
+    const result = await pool.query(
+      'UPDATE classics SET artist = $1, album_title = $2, year = $3, genre = $4 WHERE id = $5 RETURNING *',
+      [artist, album_title, year, genre, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Album not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 
 module.exports = {
     getClassics,
