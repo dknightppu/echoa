@@ -1,0 +1,195 @@
+# Echoa Backend - Classic Albums API
+
+## 1. Project Title & Overview
+
+**Project Name:** Echoa - Classic Albums API
+
+**Overview:**  
+Echoa is the backend API server for the Classic Albums project.  
+It is built using Node.js, Express, and PostgreSQL.  
+The API allows users to view, create, and update a collection of classic albums stored in a PostgreSQL database.  
+The backend is deployed and publicly accessible via Render.
+
+---
+
+## 2. Installation & Setup
+
+### Required Dependencies:
+- Node.js (v18+ recommended)
+- npm
+- PostgreSQL
+- Express
+- CORS
+- dotenv
+- pg (node-postgres)
+
+### Setup Instructions:
+
+```bash
+git clone https://github.com/dknightppu/echoa.git
+cd echoa
+npm install
+
+Create a .env file in the root directory with your PostgreSQL connection string:
+
+bash
+Copy
+Edit
+DATABASE_URL=your_postgres_database_url
+PORT=8003
+Start the server:
+
+bash
+Copy
+Edit
+npm start
+The backend API will be available locally at:
+
+bash
+Copy
+Edit
+http://localhost:8003/api/v1/echoa
+3. API Documentation
+Endpoints:
+GET /api/v1/echoa
+Returns a list of all classic albums.
+
+Example Response:
+
+json
+Copy
+Edit
+[
+  {
+    "id": 1,
+    "artist": "The Beatles",
+    "album_title": "Abbey Road",
+    "year": 1969,
+    "genre": "Rock"
+  },
+  ...
+]
+GET /api/v1/echoa/:id
+Returns details of a specific album by ID.
+
+Example Response:
+
+json
+Copy
+Edit
+[
+  {
+    "id": 2,
+    "artist": "Jay-Z",
+    "album_title": "The Blueprint",
+    "year": 2001,
+    "genre": "Hip-Hop"
+  }
+]
+POST /api/v1/echoa
+Creates a new classic album.
+
+Example Request Body:
+
+json
+Copy
+Edit
+{
+  "artist": "Kanye West",
+  "album_title": "Graduation",
+  "year": 2007,
+  "genre": "Hip-Hop"
+}
+Example Successful Response:
+
+json
+Copy
+Edit
+{
+  "id": 3,
+  "artist": "Kanye West",
+  "album_title": "Graduation",
+  "year": 2007,
+  "genre": "Hip-Hop"
+}
+PUT /api/v1/echoa/:id
+Updates an existing album by ID.
+
+Example Request Body:
+
+json
+Copy
+Edit
+{
+  "artist": "Nirvana",
+  "album_title": "Nevermind",
+  "year": 1991,
+  "genre": "Rock"
+}
+Example Successful Response:
+
+json
+Copy
+Edit
+{
+  "id": 4,
+  "artist": "Nirvana",
+  "album_title": "Nevermind",
+  "year": 1991,
+  "genre": "Rock"
+}
+4. Database Setup
+PostgreSQL Table Schema:
+sql
+Copy
+Edit
+CREATE TABLE classicalbums (
+  id SERIAL PRIMARY KEY,
+  artist VARCHAR(255) NOT NULL,
+  album_title VARCHAR(255) NOT NULL,
+  year INT,
+  genre VARCHAR(100)
+);
+Use pgAdmin 4 or psql to create the database and table.
+
+Connect the server to the database using the DATABASE_URL environment variable.
+
+5. Authentication & Security
+CORS: Enabled to allow the frontend hosted on Render to interact with the backend.
+
+dotenv: Used to securely store and access environment variables like the database connection string.
+
+No authentication mechanism (JWT, OAuth, API keys) is implemented at this stage for this basic project.
+
+6. Deployment Guide
+The backend API is deployed to Render.
+
+Deployment Steps:
+bash
+Copy
+Edit
+git add .
+git commit -m "Deploy backend"
+git push origin main
+Render automatically rebuilds and redeploys the service on every push to the main branch.
+
+Live API URL:
+
+bash
+Copy
+Edit
+https://echoa.onrender.com/api/v1/echoa
+7. License & Contribution Guidelines
+License
+This project is licensed under the MIT License.
+
+Contributing
+Fork the repository.
+
+Create a new feature branch (git checkout -b feature-branch).
+
+Make your changes.
+
+Commit and push your changes.
+
+Open a Pull Request for review.
