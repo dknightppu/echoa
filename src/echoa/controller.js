@@ -28,14 +28,19 @@ const getClassicsById = (req, res) => {
 }
 
 //Post Add Information
-const createClassics = (req, res) => {
-const {artist,album_title,year,genre} = req.body;
+const createClassics = async (req, res) => {
+  const { artist, album_title, year, genre } = req.body;
 
-pool.query(queries.createClassics, [artist,album_title,year,genre], (error, results)=> {
-  if(error)throw error;
-  res.status(201).json({ message: "Successfully added a new classic" });
-});
-
+  try {
+    const result = await pool.query(
+      'INSERT INTO classicalbums (artist, album_title, year, genre) VALUES ($1, $2, $3, $4) RETURNING *',
+      [artist, album_title, year, genre]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
 };
 
 //Put Modify Information
